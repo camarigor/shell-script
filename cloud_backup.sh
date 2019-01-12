@@ -1,10 +1,11 @@
 #!/bin/bash
 
-#you will need SSH Key-Based Authentication                                                          
-#conf files backup
-tar czpf /home/user/conf-`date +%Y_%m_%d`$.tgz /etc/postfix /etc/httpd /etc/foo
+#you will need SSH Key-Based Authentication
 
-#mysql backup
+#conf files backup
+tar czpf conf-`date +%Y_%m_%d`$.tgz /etc/postfix /etc/httpd /etc/foo
+
+# mysql backup - create a user for backup with SELECT,EVENT,RELOAD,SHOW TABLES,LOCK TABLES privileges instead of root user
 mysqldump -u backup -pPASSWD --all-databases > db-`date +%Y_%m_%d`$.sql
 
 tar czpf db-`date +%Y_%m_%d`$.tgz db-`date +%Y_%m_%d`$.sql
